@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2tlndypgas0s"]
+
+[ext_resource type="Texture2D" uid="uid://ipokwtj87gct" path="res://scenes/player/tilemap_packed2.png" id="1_8afob"]
+[ext_resource type="Script" uid="uid://b0idti3qqhxar" path="res://scenes/player/player.gd" id="1_dovo2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
+atlas = ExtResource("1_8afob")
+region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gmlin"]
+radius = 24.0
+height = 60.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dovo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_dovo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_gmlin")

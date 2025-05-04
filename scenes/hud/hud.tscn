@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0j312kevspwx"]
+
+[ext_resource type="Script" uid="uid://jcg77m4kpyo5" path="res://scenes/hud/hud.gd" id="1_48c2t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48c2t"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgeww"]
+bg_color = Color(1, 0.6, 0.6, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_48c2t")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+theme_override_styles/background = SubResource("StyleBoxFlat_48c2t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cgeww")
+step = 1.0
+value = 100.0
