@@ -38,7 +38,7 @@ func get_fatigue() -> int:
 ##################################################
 func decrease_fatigue(value: int) -> void:
 	fatigue = max(fatigue - value, MIN_FATIGUE)
-	# 피로도가 최소값 이하로 내려가지 않도록 제한
+	# 피로도를 value 만큼 줄이고, 최소값(0) 이하로 내려가지 않도록 제한
 	save_fatigue()
 	# 변경된 피로도를 저장
 
@@ -49,6 +49,7 @@ func _on_recovery_timer_timeout() -> void:
 	
 	var current_time = Time.get_unix_time_from_system()
 	# 현재 Unix 시간 가져오기
+	# 1970년 1월 1일 00:00:00 UTC부터 현재까지 경과한 초를 반환
 	if current_time - load_time() >= RECOVERY_SECONDS:
 	# 마지막 회복된 시간과 비교하여 10.0초보다 작으면
 		fatigue = MAX_FATIGUE
@@ -61,8 +62,10 @@ func save_time() -> void:
 	var config = ConfigFile.new()
 	config.set_value("game", "time", str(Time.get_unix_time_from_system()))
 	# 현재 시간을 문자열 형태로 저장
+	# 반드시 문자열로 변환 후 저장해야 함
 	config.save("user://game_time_data.cfg")
 	# 파일 저장
+	# 사용자\사용자명\AppData\Roaming\Godot\app_userdata\프로젝트명
 
 ##################################################
 func save_fatigue() -> void:
@@ -89,5 +92,6 @@ func load_time() -> float:
 	# 파일을 성공적으로 불러왔을 때
 		return float(config.get_value("game", "time"))
 		# 저장된 회복 시간 반환
+		# 반드시 float으로 변환 후 반환
 	return 0
 	# 파일이 없거나 오류 발생 시 기본값 반환
